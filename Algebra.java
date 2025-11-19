@@ -21,19 +21,12 @@ public class Algebra {
 		System.out.println(sqrt(36));
 		System.out.println(sqrt(263169));
 		System.out.println(sqrt(76123));
-
 	}
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		if (x2 < 0 && x1 > 0) {
+		if (x2 < 0) {
 			return minus(x1, -x2);
-		} else if (x2 > 0 && x1 < 0) {
-			return minus(-x1, x2);
-		} else if (x2 < 0 && x1 < 0) {
-			x1 = -x1;
-			x2 = -x2;
-
 		}
 		int result = x1;
 		for (int i = 0; i < x2; i++) {
@@ -44,11 +37,8 @@ public class Algebra {
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		if (x2 < 0) {
-			return plus(x1, -x2);
-		}
-		if (x1 < 0) {
-			return plus(-x1, x2);
+		if (x1 < 0 && x2 < 0) {
+			return plus(-x1, -x2);
 		}
 		for (int i = 0; i < x2; i++) {
 			x1--;
@@ -59,11 +49,6 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int result = 0;
-		if (x2 < 0) {
-			for (int j = 0; j < (-x2); j++) {
-				result = plus(result, x1);
-			}
-		}
 		for (int i = 0; i < x2; i++) {
 			result = plus(result, x1);
 		}
