@@ -49,34 +49,65 @@ public class Algebra {
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
+		boolean neg = false;
+		if (x1 < 0) {
+			x1 = minus(0, x1);
+			neg = true;
+		}
+		if (x2 < 0) {
+			x2 = minus(0, x2);
+			neg = true;
+		}
 		int result = 0;
 		for (int i = 0; i < x2; i++) {
 			result = plus(result, x1);
 		}
-		return result;
+
+		return neg ? minus(0, result) : result;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
+
 		int result = 1;
 		for (int i = 0; i < n; i++) {
 			result = times(result, x);
 		}
+
 		return result;
 	}
 
 	// Returns the integer part of x1 / x2
 	public static int div(int x1, int x2) {
+		boolean neg = false;
+
+		if (x2 < 0) {
+			x2 = minus(0, x2);
+			neg = true;
+		}
+		if (x1 < 0) {
+			x1 = minus(0, x1);
+			neg = true;
+		}
 		int result = 0;
 		while (x1 >= x2) {
 			x1 = minus(x1, x2);
 			result++;
 		}
-		return result;
+		return neg ? minus(0, result) : result;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
+		boolean neg = false;
+		if (x1 < 0) {
+			x1 = minus(0, x1);
+			neg = false;
+		}
+		if (x2 < 0) {
+			x2 = minus(0, x2);
+			neg = false;
+		}
 		while (x1 >= x2) {
 			x1 = minus(x1, x2);
 		}
@@ -87,6 +118,8 @@ public class Algebra {
 	public static int sqrt(int x) {
 		if (x == 0)
 			return 0;
+		if (x == 1)
+			return 1;
 		for (int i = 1; i <= x; i++) {
 			if (times(i, i) > x)
 				return i - 1;
