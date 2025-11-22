@@ -63,7 +63,7 @@ public class LoanCalc {
 
 		double loBalance = endBalance(loan, rate, n, lo);
 
-		while (hi - lo >= epsilon) {
+		while (hi - lo > epsilon) {
 			double mid = (lo + hi) / 2.0;
 			double midBalance = endBalance(loan, rate, n, mid);
 
