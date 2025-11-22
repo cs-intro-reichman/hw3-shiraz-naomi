@@ -60,20 +60,24 @@ public class LoanCalc {
 		double lo = loan / n;
 		double hi = loan * 2;
 		iterationCounter = 0;
+
 		double loBalance = endBalance(loan, rate, n, lo);
 
 		while (hi - lo >= epsilon) {
-			double g = (lo + hi) / 2.0;
-			double midBalance = endBalance(loan, rate, n, g);
-			if ((midBalance) * (loBalance) > 0) {
-				lo = g;
+			double mid = (lo + hi) / 2.0;
+			double midBalance = endBalance(loan, rate, n, mid);
+
+			if (midBalance * loBalance > 0) {
+				lo = mid;
 				loBalance = midBalance;
 			} else {
-				hi = g;
+				hi = mid;
 			}
+
 			iterationCounter++;
 		}
 
 		return (lo + hi) / 2.0;
 	}
+
 }
